@@ -1,8 +1,9 @@
-# Marketplace Cover Downloader
+# Vehicle Cover Downloader · filtro YOLO
 
-Descargador de portadas de la sección **Vehículos** de Facebook Marketplace para macOS,
-con interfaz gráfica y filtros de IA locales (YOLO11n). Descarga una imagen por anuncio,
-descarta motos, repuestos y maquinaria, y genera un CSV índice.
+Descargador de portadas de **vehículos** de Facebook Marketplace para macOS, con interfaz
+gráfica y filtro local de IA. Baja una imagen por anuncio, se queda solo con
+**automóviles, camionetas, camiones y buses** (cuatro o más ruedas), descarta motos,
+mototaxis, repuestos y maquinaria, y genera un CSV índice.
 
 ![Ventana principal](docs/capturas/01-ventana-principal.png)
 
@@ -21,12 +22,27 @@ Si algo falta en el entorno, la ventana te lo dice y ofrece instalarlo con un bo
 
 > Las capturas se generan con `venv/bin/python capturar.py`.
 
+## Portadas ya descargadas
+
+Estas son imágenes reales guardadas por la herramienta tras pasar el filtro
+(de `marketplace_portadas/callao/`, 690 archivos):
+
+![Portadas guardadas](docs/capturas/05-portadas-guardadas.jpg)
+
+Y así se ve la carpeta en Finder:
+
+![Carpeta en Finder](docs/capturas/06-carpeta-finder.jpg)
+
+En total son **1 537 portadas** repartidas en `lima/` (335), `callao/` (690) y
+`arequipa/` (512), todas vehículos de cuatro o más ruedas.
+
 ## Qué hace
 
 1. Abre Chromium con la categoría **Vehículos** de Facebook Marketplace (la sesión se
    guarda en `facebook_session/`, no se almacenan contraseñas).
 2. Recorre la lista con scroll progresivo hasta que Facebook deja de mostrar anuncios.
-3. Filtra cada anuncio en tres pasos:
+3. Filtra cada anuncio en tres pasos. **Solo pasa un vehículo completo de cuatro o más
+   ruedas**: por eso las motos, mototaxis y trimotos nunca se descargan.
    - **Texto**: descarta motos, mototaxis, scooters, repuestos, accesorios, servicios,
      alquileres, terrenos, trámites y maquinaria.
    - **YOLO11n (detección)**: acepta solo si la imagen contiene un automóvil, camioneta,
@@ -87,7 +103,8 @@ Atajos: `Intro` inicia, `Esc` cancela.
 | `interfaz.py` | Ventana gráfica (Tkinter, sin dependencias adicionales). |
 | `instalar.sh` | Crea `venv/`, instala paquetes y descarga Chromium. |
 | `main.py` | Descargador: navega, extrae, filtra y guarda. |
-| `capturar.py` | Genera las capturas del README. |
+| `capturar.py` | Genera las capturas de la interfaz. |
+| `muestras.py` | Arma la hoja de contactos con portadas ya descargadas. |
 | `facebook_session/` | Sesión de Chrome con Facebook (se reutiliza). |
 | `marketplace_portadas/` | Imágenes descargadas. |
 
