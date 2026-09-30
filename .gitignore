@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+.yolo_config/
+
+yolo11n.pt
+yolo11n-cls.pt
+
+facebook_session/
+marketplace_portadas/
+marketplace_portadas.csv
